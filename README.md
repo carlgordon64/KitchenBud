@@ -8,3 +8,6 @@ It's still currently a sandbox to see what is possible with html + css.
 This version was built before any hardware tests have been completed so viewport sizing may be slightly off.
 
 This code uses Flickity Carousel (https://flickity.metafizzy.co/) for the smooth page transitioning.
+
+TO DO:
+FIX Edit_page_1 -> search bar changes to google every time unless something else is selected. Fix this then apply the changed code to Edit_page_2

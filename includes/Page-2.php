@@ -32,12 +32,9 @@
 <?php
 $sql30 = "SELECT ID,App_Name,Icon_Image,URL,Color,Target FROM Applications WHERE ID BETWEEN 9 AND 12";
 $result = $conn->query($sql30);
-$num_rows = mysqli_num_rows($result);
-if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
       echo"<a href='".$row['URL']."' target='".$row['Target']."'><div class='col-sm-3'><div class='button-cell' style='border:5px solid ".$row['Color'].";'><img class='iconset' src='img/".$row['Icon_Image']."'></div></div></a>";
- }
 }
    ?>
 </div>
@@ -46,12 +43,9 @@ if ($result->num_rows > 0) {
 <?php
 $sql31 = "SELECT ID,App_Name,Icon_Image,URL,Color,Target FROM Applications WHERE ID BETWEEN 13 AND 16";
 $result2 = $conn->query($sql31);
-$num_rows = mysqli_num_rows($result2);
-if ($result2->num_rows > 0) {
     // output data of each row
     while($row = $result2->fetch_assoc()) {
       echo"<a href='".$row['URL']."' target='".$row['Target']."'><div class='col-sm-3'><div class='button-cell' style='border:5px solid ".$row['Color'].";'><img class='iconset' src='img/".$row['Icon_Image']."'></div></div></a>";
- }
 }
    ?>
 </div>
@@ -59,8 +53,6 @@ if ($result2->num_rows > 0) {
 <?php
 $sql30 = "SELECT ID,Page_Name,App_Count,Priority,Search_Name,Search_URL FROM Pages WHERE ID = 2";
 $result = $conn->query($sql30);
-$num_rows = mysqli_num_rows($result);
-if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
 echo "
@@ -70,8 +62,7 @@ echo "
 <input id='search-btn' type='submit' value=' '>
 </div>
 </form>";
- 
- }
+
 }
    ?>
 </div>

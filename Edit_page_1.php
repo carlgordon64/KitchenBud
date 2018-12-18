@@ -40,7 +40,6 @@ input[type="file"] {
   border-bottom-right-radius:50px;
   overflow: hidden;
 }
-
 </style>
 
 <?php
@@ -56,16 +55,12 @@ $this_page = 1;
    <?php
 $sql30 = "SELECT ID,Page_Name,App_Count,Priority,Search_Name,Search_URL FROM Pages WHERE ID = $this_page";
 $result = $conn->query($sql30);
-
-$num_rows = mysqli_num_rows($result);
-if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
       $this_name = $row['Page_Name'];
       $this_priority = $row['Priority'];
       $this_search = $row['Search_Name'];
       $this_search_URL = $row['Search_URL'];
-}
 }
    ?>
 
@@ -77,10 +72,17 @@ if ($result->num_rows > 0) {
   </div>
 <div style="text-align:center; margin-top:6px;"><label for="search">Search Bar</label><br>
   <select placeholder="Youtube" type="text" id="priority" name="new_search" style="padding-left:20px; width:310px; height:35px; border-radius:50px; display:inline-block; margin:auto; border:1px solid #E4E6EA; padding-right:50px;">
-  <option value="Google">Google</option>
-  <option value="Bing">Bing</option>
-  <option value="Yahoo">Yahoo</option>
-  <option value="Youtube">Youtube</option>
+<!-- Set existing search settings to first dropdown option  -->
+ <option value="<? $this_search_URL ?>"><? echo $this_search; ?></option>
+  <?php
+  // List the remaining search bar types in the dropdown list
+$sql40 = "SELECT ID,Engine,URL FROM SearchBars WHERE Engine != '$this_search'";
+$result22 = $conn->query($sql40);
+    // output data of each row
+    while($row = $result22->fetch_assoc()) {
+echo "<option value='".$row['Engine']."'>".$row['Engine']."</option>";
+}
+   ?>
 </select>
   </div>
 
@@ -90,21 +92,14 @@ if ($result->num_rows > 0) {
 <?php
 //search bar change
 $new_search = $_POST['new_search'];
-switch ($new_search) {
-    case "Google":
-        $new_url = "http://www.google.com/search";
-        break;
-    case "Bing":
-        $new_url = "http://www.bing.com/search";
-        break;
-    case "Yahoo":
-        $new_url = "http://search.yahoo.com/search";
-        break;
-        case "Youtube":
-        $new_url = "http://youtube.com/search";
-        break;
-}
 
+$sql50 = "SELECT ID,Engine,URL FROM SearchBars WHERE Engine = '$new_search'";
+$result32 = $conn->query($sql50);
+    // update new URL based on search bar selected from dropdown
+    while($row = $result32->fetch_assoc()) {
+$new_url = $row['URL'];
+}
+// update search name and url based on selected dropdown option
 if(isset($_POST['submit']) && !empty($new_search) ){
 $sql30 = "UPDATE Pages SET Search_Name='".$new_search."', Search_URL='".$new_url."' where id=$this_page";
 
